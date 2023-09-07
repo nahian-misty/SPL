@@ -31,11 +31,20 @@ void visualizeMaze() {
             if (maze[i][j] == 1) {
                 rectangle(x, y, x + 35, y + 35);
             } else if (maze[i][j] == 2) {
-                setcolor(YELLOW);
-                 setfillstyle(SOLID_FILL, RED);
-                //circle(x + 17, y + 17, 15);
-                rectangle(x+5, y+5, x + 30, y + 30);
-                //floodfill(312,415,15);
+              for(int k=0;k<3;k++){
+                         setcolor(YELLOW);
+
+                        // rectangle(x+k+5, y+k+5, x + 30-k, y + 30-k);
+
+                        line(290+k,385+k,290+k,420+k);
+                        //setcolor(RED);
+                        setfillstyle(SOLID_FILL, RED);
+                        line(290+k,385+k,310+k,400+k);
+                        line(310+k,400+k,290+k,400+k);
+                       // floodfill(300,295,10);
+
+                }
+
                 setcolor(WHITE);
             }
         }
