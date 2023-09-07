@@ -1,9 +1,9 @@
 #include <iostream>
 #include <graphics.h>
-#define MAZE_ROWS 40
-#define MAZE_COLS 40
+#define ROWS 40
+#define COLS 40
 
-int mazeLayout[MAZE_ROWS][MAZE_COLS] = {
+int maze[ROWS][COLS] = {
     {1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1},
     {0,0,0,0,0,1,1,1,0,1,1,0,0,0,0,0,0,0},
     {1,1,1,1,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
@@ -19,54 +19,56 @@ int mazeLayout[MAZE_ROWS][MAZE_COLS] = {
 
 };
 
-int goalFound = 0;
-int pathTaken[12][18];
+int win= 0;
+int path[12][18];
 
-void renderMaze() {
-    for (int i = 0; i < MAZE_ROWS; i++) {
-        for (int j = 0; j < MAZE_COLS; j++) {
+void visualizeMaze() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j <COLS; j++) {
             int x = j * 35;
             int y = i * 35;
 
-            if (mazeLayout[i][j] == 1) {
+            if (maze[i][j] == 1) {
                 rectangle(x, y, x + 35, y + 35);
-            } else if (mazeLayout[i][j] == 2) {
+            } else if (maze[i][j] == 2) {
                 setcolor(YELLOW);
-                //circle(xCoord + 17, yCoord + 17, 15);
+                 setfillstyle(SOLID_FILL, RED);
+                //circle(x + 17, y + 17, 15);
                 rectangle(x+5, y+5, x + 30, y + 30);
+                //floodfill(312,415,15);
                 setcolor(WHITE);
             }
         }
     }
 }
 
-void explorePaths(int row, int col) {
-    if (row < 0 || col < 0 || row >= 12 || col >= 18 || goalFound || mazeLayout[row][col] == 1 || pathTaken[row][col] == 1) {
+void printPaths(int row, int col) {
+    if (row < 0 || col < 0 || row >= 12 || col >= 18 || win || maze[row][col] == 1 || path[row][col] == 1) {
         return;
     }
 
-    pathTaken[row][col] = 1;
+    path[row][col] = 1;
 
-    if (mazeLayout[row][col] == 2) {
-        goalFound = 1;
+    if (maze[row][col] == 2) {
+        win = 1;
         return;
     }
 
-    explorePaths(row + 1, col);
-    explorePaths(row, col + 1);
-    explorePaths(row, col - 1);
-    explorePaths(row - 1, col);
+    printPaths(row + 1, col);
+    printPaths(row, col + 1);
+    printPaths(row, col - 1);
+    printPaths(row - 1, col);
 
-    if (!goalFound) {
-        pathTaken[row][col] = 0;
+    if (!win) {
+        path[row][col] = 0;
     }
 }
 
 void drawPathOnMaze() {
-    for (int i = 0; i < MAZE_ROWS; i++) {
-        for (int j = 0; j < MAZE_COLS; j++) {
-            if (pathTaken[i][j] == 1) {
-                setfillstyle(SOLID_FILL, YELLOW);
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (path[i][j] == 1) {
+                setfillstyle(SOLID_FILL, MAGENTA);
                 delay(100);
                 bar(j * 35 + 5, i * 35 + 5, (j + 1) * 35 - 5, (i + 1) * 35 - 5);
             }
@@ -76,14 +78,14 @@ void drawPathOnMaze() {
 }
 
 int main() {
-    int startingRow;
-    int startingCol;
+    int startRow;
+    int startCol;
      int k=0;
 //searching for the start point
         for (int j = 0; j < 18; j++){
-            if(mazeLayout[k][j]==0){
-                     startingRow =k;
-                    startingCol = j;}
+            if(maze[k][j]==0){
+                     startRow =k;
+                     startCol = j;}
         }
         //printf("%d\n%d\n",startingRow,startingCol);
 
@@ -92,15 +94,15 @@ int main() {
 
     cleardevice();
 
-    renderMaze();
+    visualizeMaze();
 
-    explorePaths(startingRow, startingCol);
+    printPaths(startRow, startCol);
 
-    if (goalFound) {
+    if (win) {
         printf("Path to reach the goal:\n") ;
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 18; j++) {
-                if (pathTaken[i][j] == 1) {printf("->(%d,%d) ",i,j) ;}
+                if (path[i][j] == 1) {printf("->(%d,%d) ",i,j) ;}
             }
             printf("\n") ;
         }
@@ -108,7 +110,7 @@ int main() {
          printf("Path to the goal not found...\n");
     }
 
-    if (goalFound) {
+    if (win) {
         drawPathOnMaze();
     }
 
