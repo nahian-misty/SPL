@@ -413,7 +413,8 @@ cleardevice();
                      startRow =k;
                      startCol = j;}
         }
-printf("%d\%d\n",startRow,startCol);
+//printf("%d\%d\n",startRow,startCol);
+
     int graphicsDriver = DETECT, graphicsMode;
     initgraph(&graphicsDriver, &graphicsMode, "");
 
@@ -462,6 +463,11 @@ void showInstructions() {
     // Display game instructions
     outtextxy(200, 200, "Game Instructions");
     delay(1000);
+}
+
+void scoreboard(){
+
+
 }
 
 int main() {
@@ -559,7 +565,7 @@ printf("%s\n",players[i]);
         }
 cleardevice();
 
-    int choice;
+    int choice,cou=0;
     int k;
     while (1) {
         cleardevice();
@@ -569,11 +575,16 @@ cleardevice();
 
 
         if(choice==1){
-                for(int g=0;g<value;g++){
+                for(int g=0;g<value;){
+                        g++;
                 startGame();
                 cleardevice();
-                printf("twinkle\n");
-                k=g;
+                //printf("twinkle %d\n",g);
+
+                if(g==value-1){
+                    //printf("hello");
+                }
+
                 break;
                 }
 
@@ -588,14 +599,25 @@ cleardevice();
             closegraph();
                 exit(0);
         }
-    flag=1;
+    cou++;
 
+    if(cou==value){
+
+
+cleardevice();
+
+    outtextxy(140, 100, "Scores");
     for(int i=0;i<value;i++){
     printf("%s   %d\n",players[i],scores[i]);
 
     }
-    break;
+
     }
+
+
+    }
+
+
 
 
 
