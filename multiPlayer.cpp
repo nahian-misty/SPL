@@ -188,7 +188,7 @@ void timer(){
         scores[m]=score;
         settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
         rectangle(180, 220, 420, 270);
-        outtextxy(180, 250, "Your score is 0");
+        outtextxy(200, 250, "Your score is 0");
         m++;
         delay(1000);
         break;}
