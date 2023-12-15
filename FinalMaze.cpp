@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <graphics.h>
 #include<time.h>
@@ -196,7 +195,7 @@ void timer(){
         scores[m]=score;
         settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
         rectangle(180, 220, 420, 270);
-        outtextxy(180, 250, "Your score is 0");
+        outtextxy(190, 250, "Your score is 0");
         m++;
         delay(1000);
         break;}
@@ -630,7 +629,7 @@ int main() {
 
 strcpy(players[i],name);
 name[50]={0};
-printf("%s\n",players[i]);
+//printf("%s\n",players[i]);
 }
 
      while (1) {
