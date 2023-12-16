@@ -56,8 +56,8 @@ int maze3[ROWS][COLS]=
     {1,0,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1},
     {1,0,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1},
     {1,0,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1},
-    {1,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,1},
-    {1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
+    {1,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1},
     {1,0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0,1},
@@ -178,7 +178,7 @@ void timer(){
         //outtextxy(300, 430, "YOU WINNNNN!!!");
         //delay(1000);
         //cleardevice();
-        score=60-score-moves;
+        score=100-score-moves;
         scores[m]=score;
         settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
         rectangle(150, 200, 500, 300);
@@ -631,6 +631,21 @@ strcpy(players[i],name);
 name[50]={0};
 //printf("%s\n",players[i]);
 }
+
+
+
+    setcolor(MAGENTA);
+    settextstyle(DEFAULT_FONT, HORIZ_DIR, 4);
+
+    outtextxy(150, 180, "WELCOME TO");
+
+    //setcolor(GREEN);
+
+    settextstyle(DEFAULT_FONT, HORIZ_DIR, 3);
+    outtextxy(80, 240, "A-MAZING MAZE WORLD");
+    delay(4000);
+
+    setcolor(WHITE);
 
      while (1) {
         cleardevice();
